@@ -1,0 +1,54 @@
+.wip {
+    background-color: #d9a762;
+}
+
+body {
+    display: inline;
+}
+
+.my-pos {
+    margin: 40px auto 0 auto;
+    width: 50%;
+    border-style: solid;
+    border-radius: 10px;
+}
+
+.task {
+    margin: 2px auto;
+    border-style: groove;
+    transition: .1s linear;
+    max-width: 700px;
+    border-radius: 10px;
+}
+
+.task:hover {
+    box-shadow: 2px 2px 5px #000;
+    cursor: pointer;
+}
+
+.task-container {
+    height: 80vh;
+    overflow-y: scroll;
+}
+
+.task-push-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-style: solid;
+    padding: 10px;
+    height: max-content;
+    margin: 100px 0 0 100px;
+    border-radius: 10px;
+}
+
+.head {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.auth-form {
+    margin: 0 auto;
+    max-width: 450px;
+}
