@@ -12,7 +12,7 @@ export default class AuthService {
     };
 
     static async register(registrationForm) {
-      const response = await fetch('http://localhost:3030/api/v1/registration', {
+      const response = await fetch('http://localhost:3030/api/v1/register', {
         headers: {
           'Content-Type': 'application/json'
         },
