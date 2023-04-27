@@ -1,0 +1,125 @@
+.nav_bar{
+    width: 100%;
+    backdrop-filter: blur(5px);
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    padding: 15px 20px;
+ 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+ }
+ .nav_btn {
+    padding: 10px 20px;
+    border: none;
+    background-color: cadetblue;
+    color: #fff;
+    font-size: 1em;
+    margin: 0 10px;
+    border-radius: 10px;
+    transition: .1s linear;
+    text-decoration: none;
+ }
+ .nav_btn:hover, .article_btn:hover{
+    box-shadow: 2px 2px 10px #00000089;
+    cursor: pointer;
+ }
+
+ .wrapper{
+    margin-top: 70px;
+ }
+
+ .article{
+    margin: 10px 0;
+    background-color: #ffffff;
+    color: #000;
+    border-radius: 10px;
+    padding: 10px;
+    max-width: 400px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+ }
+
+ .buttons{
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+ }
+
+ .article_btn_img{
+    max-width: 25px;
+    cursor: pointer;
+    margin: 0 10px;
+ }
+
+ .user_info{
+    margin: 0 auto;
+    margin-top: 70px;
+    color: #000;
+    background-color: #ffffff;
+    border-radius: 10px;
+    max-width: 500px;
+    padding: 20px;
+ }
+
+ .user_info_section{
+    display: flex;
+    align-items: center;
+ }
+ .user_info_title{
+    width: 150px;
+ }
+
+ .main_articles{
+   display: flex;
+   flex-direction: column;
+   gap: 20px;
+   align-items: center;
+   justify-content: center;
+}
+
+ .main_article{
+   width: 900px;
+   display: flex;
+   padding: 10px;
+   margin-top: 70px;
+   border-radius: 10px;
+   background-color: #333232;
+   color: #fff;
+}
+.article_img{
+border-radius: 10px;
+margin-right: 10px;
+}
+.article_btn_wrapper{
+   width: 100%;
+   display: flex;
+   justify-content: center;
+}
+.article_text{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: space-between;
+}
+.article_info{
+   width: 100%;
+   display: flex;
+   justify-content: space-between;
+}
+
+.article_btn{
+   padding: 10px 20px;
+   border: none;
+   background-color: cadetblue;
+   color: #fff;
+   font-size: 1em;
+   margin: 0 10px;
+   border-radius: 10px;
+   transition: .1s linear;
+   align-items: center;
+   display: flex;
+}

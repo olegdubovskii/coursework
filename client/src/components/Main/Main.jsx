@@ -1,71 +1,57 @@
 import React, { useEffect, useState } from "react";
 import {Link} from 'react-router-dom';
-import "./styles/mainPageStyles.css";
+import styles from "./styles/mainPageStyles.module.css";
+import MainArticlePlate from "./MainArticlePlate";
 
-const Main = ({navigate, setUser}) => {
+const Main = ({setUser}) => {
 
+    const [allArticles, setAllArticles] = useState([]);
+
+    const getArticles = async () => {
+        const response = await fetch('http://localhost:3030/api/v1/allArticles');
+        if (response.status === 200) {
+            return response.json();
+        } else {
+            return [];
+        }
+    };
+
+    useEffect(() => {
+        getArticles().then(data => setAllArticles(data));
+    }, []);
 
 
     return ( localStorage.getItem('accessToken') ?
-    <div>
-    <nav>
-        <ul>
-            <li>
-                <button>Личный кабинет</button>
-                <button onClick={() => { localStorage.removeItem('accessToken'); setUser({})}}>Выйти</button>
-            </li>
-        </ul>
-    </nav>
-    <section> 
-    <article>
-        <img src="https://picsum.photos/400/300" alt=""/>   
-        <div className="text"> 
-            <h3>Название статьи</h3> 
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris bibendum metus vel nibh iaculis, vel tristique lorem rutrum. Sed a leo et dolor lacinia laoreet vel vel magna. Vestibulum ac libero vel sapien congue pulvinar nec in lacus. Sed a leo et dolor lacinia laoreet vel vel magna. Vestibulum ac libero vel sapien congue pulvinar nec in lacus.</p> 
-            <button>Читать далее</button>
-        </div> 
-    </article> 
-    <article>
-        <img src="https://picsum.photos/400/300" alt=""/>
-        <div className="text"> 
-            <h3>Название статьи</h3> 
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris bibendum metus vel nibh iaculis, vel tristique lorem rutrum. Sed a leo et dolor lacinia laoreet vel vel magna. Vestibulum ac libero vel sapien congue pulvinar nec in lacus. Sed a leo et dolor lacinia laoreet vel vel magna. Vestibulum ac libero vel sapien congue pulvinar nec in lacus.</p> 
-            <button>Читать далее</button>
-        </div>
-    </article> 
-    </section>
+
+    <div className={styles.main_articles}>
+            <nav className={styles.nav_bar}>
+                <h1>Автомобильный блог</h1>
+                <div>
+                    <Link to='/cabinet'>
+                        <button className={styles.nav_btn}>Личный кабинет</button>
+                    </Link>
+                    <button className={styles.nav_btn} onClick={() => { localStorage.removeItem('accessToken'); setUser({})}}>Выйти</button> 
+                </div>   
+            </nav>
+        <section> 
+            { allArticles.map((article, key) => { return <MainArticlePlate key = {key} article = {article}/>})}
+        </section>
     </div>
     :
-    <div>
-    <nav>
-        <ul>
-            <li>
-                <Link to='/login'>
-                    <button>Войти</button>
-                </Link>
-                <Link to='/registration'>
-                    <button>Регистрация</button>
-                </Link>    
-            </li>
-        </ul>
+    <div className={styles.main_articles}>
+    <nav className={styles.nav_bar}>
+        <h1>Автомобильный блог</h1>
+        <div>
+        <Link to='/login' state={{from: '/'}}>
+                        <button className={styles.nav_btn}>Войти</button>
+                    </Link>
+            <Link to='/registration'>
+                <button className={styles.nav_btn}>Регистрация</button>
+            </Link>  
+        </div>   
     </nav>
     <section> 
-    <article>
-        <img src="https://picsum.photos/400/300" alt=""/>   
-        <div className="text"> 
-            <h3>Название статьи</h3> 
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris bibendum metus vel nibh iaculis, vel tristique lorem rutrum. Sed a leo et dolor lacinia laoreet vel vel magna. Vestibulum ac libero vel sapien congue pulvinar nec in lacus. Sed a leo et dolor lacinia laoreet vel vel magna. Vestibulum ac libero vel sapien congue pulvinar nec in lacus.</p> 
-            <button>Читать далее</button>
-        </div> 
-    </article> 
-    <article>
-        <img src="https://picsum.photos/400/300" alt=""/>
-        <div className="text"> 
-            <h3>Название статьи</h3> 
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris bibendum metus vel nibh iaculis, vel tristique lorem rutrum. Sed a leo et dolor lacinia laoreet vel vel magna. Vestibulum ac libero vel sapien congue pulvinar nec in lacus. Sed a leo et dolor lacinia laoreet vel vel magna. Vestibulum ac libero vel sapien congue pulvinar nec in lacus.</p> 
-            <button>Читать далее</button>
-        </div>
-    </article> 
+        { allArticles.map((article, key) => { return <MainArticlePlate key = {key} article = {article}/>})}
     </section>
     </div> 
     );

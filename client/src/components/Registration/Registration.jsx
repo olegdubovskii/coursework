@@ -1,9 +1,12 @@
 import React from "react";
-import './styles/registrationStyles.css';
-import {Link} from 'react-router-dom';
+import styles from './styles/registrationStyles.module.css';
+import {Link, useLocation} from 'react-router-dom';
 import AuthService from "../../services/authService";
 
 const Registration = ({navigate}) => {
+    const location = useLocation();
+    const props = location.state;
+    console.log(props);
     const onSubmit = async (e) => {
         e.preventDefault();
         const form = e.target;
@@ -14,33 +17,31 @@ const Registration = ({navigate}) => {
         };    
         const resp = await AuthService.register(registationData);
         if (resp.status === 200) {
-            navigate('/login');
-        } else {
+            navigate(props.from, {state: props.props});
+        } else if (resp.status === 409) {
             alert('Wrong nickname or email');
         }
     }
     return(
-        <div>
-            <nav>
-                <ul>
-                    <li>
-                        <Link to='/'>
-                            <button>На главную</button>
-                        </Link>
-                    </li>
-                </ul>
+        <div className={styles.login_container}>
+            <nav className={styles.nav_bar}>
+                <h1>Автомобильный блог</h1>
+                    <Link to='..'>
+                        <button className={styles.nav_btn}>{"<"} На главную</button>
+                    </Link>
             </nav> 
-            <form onSubmit={onSubmit}> 
+            <form className={styles.login_form} onSubmit={onSubmit}> 
                 <label>Имя пользователя</label> 
-                <input type="text" id="nickname" name="nickname" placeholder="Введите имя пользователя"/> 
+                <input className={styles.form_input} type="text" id="nickname" name="nickname" placeholder="Введите имя пользователя"/> 
 
                 <label>Email</label> 
-                <input type="text" id="emailAdress" name="emailAdress" placeholder="Введите email"/> 
+                <input className={styles.form_input} type="text" id="emailAdress" name="emailAdress" placeholder="Введите email"/> 
          
                 <label>Пароль</label> 
-                <input type="password" id="password" name="password" placeholder="Введите пароль"/> 
-         
-                <button type="submit">Зарегистрироваться</button> 
+                <input className={styles.form_input} type="password" id="password" name="password" placeholder="Введите пароль"/> 
+                <div className={styles.button_wrapper}>
+                    <button className={styles.form_button} type="submit">Зарегистрироваться</button> 
+                </div>
             </form> 
        </div>
     );
