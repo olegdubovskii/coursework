@@ -17,7 +17,8 @@ const Main = ({setUser}) => {
     };
 
     useEffect(() => {
-        getArticles().then(data => setAllArticles(data));
+        getArticles().then(data => {setAllArticles(data)});
+        //getArticles().then(data => console.log(data));
     }, []);
 
 
@@ -45,7 +46,7 @@ const Main = ({setUser}) => {
         <Link to='/login' state={{from: '/'}}>
                         <button className={styles.nav_btn}>Войти</button>
                     </Link>
-            <Link to='/registration'>
+            <Link to='/registration' state={{from: '/'}}>
                 <button className={styles.nav_btn}>Регистрация</button>
             </Link>  
         </div>   

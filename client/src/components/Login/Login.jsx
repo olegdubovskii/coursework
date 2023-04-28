@@ -6,7 +6,6 @@ import styles from './styles/loginStyles.module.css'
 const Login = ({navigate, setUser}) => {
     const location = useLocation();
     const props = location.state;
-    console.log(props);
     const onSubmit = async (e) => {
         e.preventDefault();
         const form = e.target;

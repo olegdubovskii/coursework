@@ -10,16 +10,21 @@ const Registration = ({navigate}) => {
     const onSubmit = async (e) => {
         e.preventDefault();
         const form = e.target;
+        const reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
         const registationData = { 
             nickname: form.elements['nickname'].value,
             emailAdress: form.elements['emailAdress'].value, 
             password: form.elements['password'].value 
-        };    
-        const resp = await AuthService.register(registationData);
-        if (resp.status === 200) {
-            navigate(props.from, {state: props.props});
-        } else if (resp.status === 409) {
-            alert('Wrong nickname or email');
+        };
+        if (reg.test(registationData.emailAdress)) {    
+            const resp = await AuthService.register(registationData);
+            if (resp.status === 200) {
+                navigate(props.from, {state: props.props});
+            } else if (resp.status === 409) {
+                alert('Wrong nickname or email');
+            }
+        } else {
+            alert('wrong nickname or email')
         }
     }
     return(

@@ -11,7 +11,7 @@
     justify-content: space-between;
     align-items: center;
  }
- .nav_btn, .article_btn{
+ .nav_btn {
     padding: 10px 20px;
     border: none;
     background-color: cadetblue;
@@ -47,6 +47,7 @@
     display: flex;
     align-items: center;
     margin-top: 20px;
+    margin-left: 100px;
  }
 
  .article_btn_img{
@@ -110,11 +111,16 @@ margin-right: 10px;
    display: flex;
    justify-content: space-between;
 }
-.like_img{
-   max-width: 25px;
-}
-.likes_wrapper{
+
+.article_btn{
+   padding: 10px 20px;
+   border: none;
+   background-color: cadetblue;
+   color: #fff;
+   font-size: 1em;
+   margin: 0 10px;
+   border-radius: 10px;
+   transition: .1s linear;
+   align-items: center;
    display: flex;
-   align-items: flex-end;
-   
 }

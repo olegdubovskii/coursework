@@ -10,8 +10,8 @@ const UserPage = ({user, navigate, setUser}) => {
     const [userData, setUserData] = useState({});
     const [userArticles, setUserArticles] = useState([]);
 
-    const getArticles = async () => {
-        const response = await fetch(`http://localhost:3030/api/v1/user/${usr}/allArticles`);
+    const getUserArticles = async () => {
+        const response = await fetch(`http://localhost:3030/api/v1/users/${usr}/userArticles`);
         if (response.status === 200) {
             return response.json();
         } else {
@@ -20,7 +20,7 @@ const UserPage = ({user, navigate, setUser}) => {
     };
 
     const getUserData = async () => {
-        const response = await fetch(`http://localhost:3030/api/v1/user/${usr}/userData`);
+        const response = await fetch(`http://localhost:3030/api/v1/users/${usr}/userData`);
         if (response.status === 200) {
             return response.json();
         } else {
@@ -29,10 +29,10 @@ const UserPage = ({user, navigate, setUser}) => {
     }
 
     useEffect(() => {
-        if (usr == user.nickname) {
+        if (usr === user.id) {
             navigate('/cabinet');
         } else {
-            getArticles().then(data => {setUserArticles(data)});
+            getUserArticles().then(data => {setUserArticles(data)});
             getUserData().then(data => {setUserData(data)});
         }
     }, []);
@@ -54,7 +54,7 @@ const UserPage = ({user, navigate, setUser}) => {
                     <div className={styles.user_info}>
                         <div className={styles.user_info_section}>
                             <p className={styles.user_info_title}>имя пользователя:</p>
-                            <h3>{usr}</h3>
+                            <h3>{userData.nickname}</h3>
                         </div>
                         <div className={styles.user_info_section}>
                             <p className={styles.user_info_title}>email:</p>
@@ -73,10 +73,10 @@ const UserPage = ({user, navigate, setUser}) => {
                             <Link to='..'>
                                 <button className={styles.nav_btn}> {"<"} На главную</button>
                             </Link>
-                            <Link to='/login' state={{from: `/users/${usr}`, props: usr}}>
+                            <Link to='/login' state={{from: `/users/${userData.nickname}`, props: usr}}>
                                 <button className={styles.nav_btn}>Войти</button>
                             </Link>
-                            <Link to='/registration'>
+                            <Link to='/registration' state={{from: `/users/${userData.nickname}`, props: usr}}>
                                 <button className={styles.nav_btn}>Регистрация</button>
                             </Link>  
                         </div>      
@@ -84,7 +84,7 @@ const UserPage = ({user, navigate, setUser}) => {
                     <div className={styles.user_info}>
                         <div className={styles.user_info_section}>
                             <p className={styles.user_info_title}>имя пользователя:</p>
-                            <h3>{usr}</h3>
+                            <h3>{userData.nickname}</h3>
                         </div>
                         <div className={styles.user_info_section}>
                             <p className={styles.user_info_title}>email:</p>

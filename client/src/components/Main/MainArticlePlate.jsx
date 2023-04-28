@@ -7,7 +7,7 @@ import {Link} from 'react-router-dom';
 const MainArticlePlate = ({article}) => {
     return(
         <article className={styles.main_article}>
-        <img className={styles.article_img} src="https://picsum.photos/400/300" alt=""/>   
+        <img className={styles.article_img} src={article.imagelink} alt=""/>   
         <div className={styles.article_text}> 
             <h3>{article.title}</h3> 
             <p>{article.content}</p> 
@@ -18,7 +18,7 @@ const MainArticlePlate = ({article}) => {
             </div>
             <div className={styles.article_info}>
                     <p>{article.creation_date}</p>
-                    <Link to={`/users/${article.user_name}`} state={article.user_name}>
+                    <Link to={`/users/${article.user_name}`} state={article.user_id}>
                         <button className={styles.article_btn}>
                             <img className={styles.article_btn_img} src={userImg} alt="" />
                             {article.user_name}
